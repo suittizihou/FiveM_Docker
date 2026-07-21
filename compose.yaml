@@ -18,8 +18,8 @@ services:
       - ./volumes/txData:/txData
 
       ## .envのSERVER_DATA_FOLDERを設定したらコメントアウトを外す
-      - ./config/lesson.cfg:${SERVER_DATA_FOLDER:?SERVER_DATA_FOLDERを.envに設定してください}lesson.cfg:ro
-      - ./resources/[local]:${SERVER_DATA_FOLDER:?SERVER_DATA_FOLDERを.envに設定してください}resources/[local]
+      # - ./config/lesson.cfg:${SERVER_DATA_FOLDER:?SERVER_DATA_FOLDERを.envに設定してください}lesson.cfg:ro
+      # - ./resources/[local]:${SERVER_DATA_FOLDER:?SERVER_DATA_FOLDERを.envに設定してください}resources/[local]
 
     stdin_open: true
     tty: true
