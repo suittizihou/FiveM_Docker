@@ -1,0 +1,25 @@
+services:
+  fivem:
+    image: spritsail/fivem:33230
+    container_name: fivem-lesson
+
+    restart: on-failure:5
+
+    environment:
+      NO_DEFAULT_CONFIG: "1"
+      NO_LICENSE_KEY: "1"
+
+    ports:
+      - "30120:30120/tcp"
+      - "30120:30120/udp"
+      - "40120:40120" # txAdmin webserver port
+
+    volumes:
+      - ./volumes/txData:/txData
+
+      ## .envのSERVER_DATA_FOLDERを設定したらコメントアウトを外す
+      - ./config/lesson.cfg:${SERVER_DATA_FOLDER:?SERVER_DATA_FOLDERを.envに設定してください}lesson.cfg:ro
+      - ./resources/[local]:${SERVER_DATA_FOLDER:?SERVER_DATA_FOLDERを.envに設定してください}resources/[local]
+
+    stdin_open: true
+    tty: true
