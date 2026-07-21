@@ -19,13 +19,13 @@ Docker Desktopは起動した状態にしておいてください。
 任意のフォルダでgit bashを開き、リポジトリをクローンします。
 
 ```bash
-git clone <リポジトリのURL>
+git clone https://github.com/suittizihou/FiveM_Docker.git lesson
 ```
 
 クローンしたフォルダへ移動します。
 
 ```bash
-cd <リポジトリ名>
+cd lesson
 ```
 
 ---
@@ -56,17 +56,13 @@ docker compose ps
 http://localhost:40120
 ```
 
+Docker Desktopを開き、`fivem-lesson`コンテナの`Logs`を確認します。
+
+txAdminの初回ログインに使用するPINコードが出力されているので、ブラウザのtxAdmin画面へ入力します。
+
 画面の案内に従って、txAdminの初期設定を完了してください。
 
-セットアップ中に表示される`Server Data Folder`の値は、後ほど使用します。
-
-例：
-
-```text
-/txData/FiveMBasicServerCFXDefault_XXXXXX.base/
-```
-
-末尾の`/`まで含めてコピーしてください。
+初期設定が完了したら、txAdminの`Settings`に移動し、`FXServer`タブに移動して`Server Data Folder`のパスを全てコピーしてください。
 
 ---
 
@@ -76,6 +72,11 @@ http://localhost:40120
 
 作成した`.env`を開き、txAdminに表示された`Server Data Folder`を設定します。
 
+```env
+SERVER_DATA_FOLDER=<Server Data Folderのパス>
+```
+
+例：
 ```env
 SERVER_DATA_FOLDER=/txData/FiveMBasicServerCFXDefault_XXXXXX.base/
 ```
@@ -108,19 +109,7 @@ SERVER_DATA_FOLDER=/txData/FiveMBasicServerCFXDefault_XXXXXX.base/
 
 ## 6. `server.cfg`から`lesson.cfg`を読み込む
 
-txAdminが作成したServer Data Folder内の`server.cfg`を開きます。
-
-ホストPC側では、次のような場所にあります。
-
-```text
-volumes/txData/<サーバーデータフォルダ>/server.cfg
-```
-
-例：
-
-```text
-volumes/txData/FiveMBasicServerCFXDefault_XXXXXX.base/server.cfg
-```
+txAdminの画面から、`CFG Editor`を開きます。
 
 `server.cfg`の末尾へ、次の1行を追加します。
 
@@ -128,7 +117,7 @@ volumes/txData/FiveMBasicServerCFXDefault_XXXXXX.base/server.cfg
 exec lesson.cfg
 ```
 
-これにより、Gitで管理されている設定ファイルが読み込まれます。
+これにより、`config/`に用意した設定ファイルが読み込まれます。
 
 ---
 
